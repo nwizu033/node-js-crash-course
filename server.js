@@ -39,6 +39,13 @@ const server = http.createServer((req,res) => {
             res.statusCode = 200;
             break;
 
+        // lets redirect '/contact-us' to '/contact'
+        case '/contact-us':
+            res.statusCode = 301;
+            res.setHeader('Location','/contact');
+            res.end();
+            break;
+
         default:
             path += '404.html'
             res.statusCode = 404;
@@ -50,7 +57,7 @@ const server = http.createServer((req,res) => {
     fs.readFile(path,(err,data) =>{
         if(err) {
             console.log(err);
-            res.send();
+            res.end();
         }else{
             res.write(data);
             res.end();
