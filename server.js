@@ -8,22 +8,40 @@ const server = http.createServer((req,res) => {
     // let's create a path first, where the files are located
     let path = './pages/';
 
-    // let's now do the switching
+
+    // STATUS CODE RANGES
+    // 100 range - informational responses
+    // 200 range - success codes
+    // 300 range - codes for redirects
+    // 400 range - user or client error codes
+    // 500 range - server error codes.
+
+    // SOME POPULAR STATUS CODES
+    // 200 - ok
+    // 301 - resources moved (permanent redirect)
+    // 404 - not found
+    // 500 - internal server error
+
+    // let's now do the switching and add the status codes to the cases
     switch(req.url){
         case '/':
             path += 'index.html';
+            res.statusCode = 200;
             break;
 
         case '/about':
             path += 'about.html';
+            res.statusCode = 200;
             break;
 
         case '/contact':
             path += 'contact.html'
+            res.statusCode = 200;
             break;
 
         default:
             path += '404.html'
+            res.statusCode = 404;
             break;
     }
 
